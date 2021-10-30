@@ -1,6 +1,9 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { FindJob, Upskill } from "./Routes";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import FindJob from "./Routes/FindJob";
+import Upskill from "./Routes/Upskill";
+import NotFound from "./Routes/NotFound";
+
 function App() {
   return (
     <Router>

@@ -2,8 +2,12 @@ const express = require("express");
 const app = express();
 const PORT = 8000;
 const data = require('./data/data.json');
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors({
+    origin: '*'
+}));
 
 app.get("/", (req, res) => {
     res.send("Welcome to goodera job serach portal api");
@@ -20,9 +24,11 @@ app.get("/jobs", (req, res) => {
                 }
             } )
         })
-        
+        res.send(response);
+    }else{
+        res.send(data);
     }
-    res.send(response);
+    
 });
 
 app.get("/jobs/:id", (req, res) => {

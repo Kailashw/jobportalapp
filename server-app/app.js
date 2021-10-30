@@ -13,9 +13,9 @@ app.get("/jobs", (req, res) => {
     let response = []
     if(Object.keys(req.query).length){
         Object.keys(req.query).forEach(query => {
-            let searchterm = req.query[query];
+            let searchterm = req.query[query].toLowerCase().trim();
             data.forEach(el => {
-                if(el[query].indexOf(searchterm) > -1){
+                if(el[query].toLowerCase().trim().indexOf(searchterm) > -1){
                     response.push(el);
                 }
             } )

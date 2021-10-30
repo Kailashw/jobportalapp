@@ -6,7 +6,18 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 
 export default function Header({ setSearchQuerys }) {
-  const [queryText, setqueryText] = React.useState("");
+  const [locationqueryText, setLocationqueryText] = React.useState("");
+  const [titlequeryText, setTitlequeryText] = React.useState("");
+
+  const handleSubmit = () => {
+    let queryText = ''
+    if(locationqueryText && titlequeryText){
+        queryText = `${locationqueryText}&${titlequeryText}`
+    }else{
+        queryText = locationqueryText ? locationqueryText : titlequeryText
+    }
+    setSearchQuerys(queryText);
+  }
   return (
     <>
       <AppBar position="static">
@@ -33,10 +44,17 @@ export default function Header({ setSearchQuerys }) {
           placeholder="Search by job title…"
           inputProps={{ "aria-label": "search" }}
           value={queryText}
-          onChange={(e) => setqueryText(e.target.value)}
+          onChange={(e) => setTitlequeryText(`title=${e.target.value}`)}
+        />
+        <InputBase
+          style={{ marginLeft: "100px" }}
+          placeholder="Search by job title…"
+          inputProps={{ "aria-label": "search" }}
+          value={queryText}
+          onChange={(e) => setLocationqueryText(`location=${e.target.value}`)}
         />
         <Button
-          onClick={(e) => setSearchQuerys(`title=${queryText}`)}
+          onClick={handleSubmit}
           variant="contained"
         >
           Search

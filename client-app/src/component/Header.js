@@ -10,14 +10,16 @@ export default function Header({ setSearchQuerys }) {
   const [titlequeryText, setTitlequeryText] = React.useState("");
 
   const handleSubmit = () => {
-    let queryText = ''
-    if(locationqueryText && titlequeryText){
-        queryText = `${locationqueryText}&${titlequeryText}`
-    }else{
-        queryText = locationqueryText ? locationqueryText : titlequeryText
+    let queryText = "";
+    if (locationqueryText && titlequeryText) {
+      queryText = `location=${locationqueryText}&title=${titlequeryText}`;
+    } else {
+      queryText = locationqueryText
+        ? `location=${locationqueryText}`
+        : `title=${titlequeryText}`;
     }
     setSearchQuerys(queryText);
-  }
+  };
   return (
     <>
       <AppBar position="static">
@@ -43,20 +45,17 @@ export default function Header({ setSearchQuerys }) {
           style={{ marginLeft: "100px" }}
           placeholder="Search by job title…"
           inputProps={{ "aria-label": "search" }}
-          value={queryText}
-          onChange={(e) => setTitlequeryText(`title=${e.target.value}`)}
+          value={titlequeryText}
+          onChange={(e) => setTitlequeryText(`${e.target.value}`)}
         />
         <InputBase
           style={{ marginLeft: "100px" }}
-          placeholder="Search by job title…"
+          placeholder="Search by job location"
           inputProps={{ "aria-label": "search" }}
-          value={queryText}
-          onChange={(e) => setLocationqueryText(`location=${e.target.value}`)}
+          value={locationqueryText}
+          onChange={(e) => setLocationqueryText(`${e.target.value}`)}
         />
-        <Button
-          onClick={handleSubmit}
-          variant="contained"
-        >
+        <Button onClick={handleSubmit} variant="contained">
           Search
         </Button>
       </div>
